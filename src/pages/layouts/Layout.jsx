@@ -9,15 +9,15 @@ export default function Layout() {
     const nodeRef = useRef(null);
 
     return (
-        <div>
-            <Navbar />
-            <SwitchTransition>
-                <CSSTransition timeout={200} classNames='fade' key={location.pathname} nodeRef={nodeRef}>
-                    <div ref={nodeRef} className='max-w-6xl mx-auto p-3'>
-                        <Outlet/>
-                    </div>
-                </CSSTransition>
-            </SwitchTransition>
-        </div>
+    <>
+        <Navbar />
+        <SwitchTransition>
+            <CSSTransition timeout={200} classNames='fade' key={location.pathname} nodeRef={nodeRef}>
+                <div ref={nodeRef} className='max-w-6xl mx-auto p-3'>
+                    <Outlet/>
+                </div>
+            </CSSTransition>
+        </SwitchTransition>
+    </>
     )
 }
