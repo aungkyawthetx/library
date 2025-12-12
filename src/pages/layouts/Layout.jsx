@@ -4,14 +4,14 @@ import Profile from '../../assets/user.png';
 export default function Layout() {
     return (
         <div>
-            <nav>
-                <ul className='flex justify-around items-center shadow backdrop-blur-lg p-3'>
+            <nav className='border-b border-gray-300'>
+                <ul className='flex justify-between items-center backdrop-blur-lg p-3 max-w-6xl mx-auto'>
                     <li className='flex items-center gap-3'>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
 
-                        <input type="text" placeholder='Search books' className='border border-gray-300 px-3 py-1 outline-none rounded focus:ring-0 focus:border-indigo-500'/>
+                        <input type="text" placeholder='Search books' className='outline-none'/>
                     </li>
                     <li className='flex items-center gap-2 cursor-pointer -ml-32'>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -30,7 +30,9 @@ export default function Layout() {
                     </li>
                 </ul>
             </nav>
-            <Outlet/>
+            <div className='max-w-6xl mx-auto p-3'>
+                <Outlet/>
+            </div>
         </div>
     )
 }
