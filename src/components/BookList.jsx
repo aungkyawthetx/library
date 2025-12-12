@@ -1,5 +1,4 @@
 import React from 'react'
-import BookCover from "../assets/bookcover.png";
 import useFetch from '../hooks/useFetch.js';
 import { Link } from 'react-router-dom';
 
