@@ -6,10 +6,6 @@ export default function Books() {
 
     let { data : books, loading, error } = useFetch('http://localhost:3001/books');
 
-    if (error) {
-        return <p> {error} </p>
-    }
-
     const classes = {
         "Romance": "bg-pink-100 text-pink-700",
         "History": "bg-yellow-100 text-yellow-700",
@@ -19,12 +15,17 @@ export default function Books() {
         "Thriller": "bg-red-100 text-red-700",
         "Classic": "bg-gray-200 text-gray-700",
     };
+    
+    // errors state
+    if (error) {
+        return <p> {error} </p>
+    }
 
   return (
     <div>
         { loading && <p className='p-2 text-indigo-500 font-semibold'>Loading..</p> }
         {!!books && (
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 my-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-3">
                 {books.map((book) => (
                 <Link to={`/books/${book.id}`} className="p-4 border border-gray-200 rounded-xl shadow" key={book.id}>
                     <img src={book.cover} alt="" className="h-80 w-full border border-gray-200 rounded-lg"/>
