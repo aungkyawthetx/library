@@ -1,13 +1,33 @@
 import { Outlet } from 'react-router-dom'
+import Profile from '../../assets/user.png';
 
 export default function Layout() {
     return (
         <div>
-            <nav className='shadow p-4 px-5 font-semibold flex justify-between items-center backdrop-blur-lg'>
-                <p className='text-blue-500'>Vite + React</p>
-                <ul className='flex gap-5'>
-                    <li> Home </li>
-                    <li> Create</li>
+            <nav>
+                <ul className='flex justify-around items-center shadow backdrop-blur-lg p-3'>
+                    <li className='flex items-center gap-3'>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>
+
+                        <input type="text" placeholder='Search books' className='border border-gray-300 px-3 py-1 outline-none rounded focus:ring-0 focus:border-indigo-500'/>
+                    </li>
+                    <li className='flex items-center gap-2 cursor-pointer -ml-32'>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
+                        </svg>
+                        <span className="text-2xl text-indigo-600 font-bold"> Shefio</span>
+                    </li>
+                    <li className='flex items-center gap-2'>
+                        <button className='bg-indigo-500 text-white py-1 px-2 rounded cursor-pointer flex items-center gap-1'>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            Create
+                        </button>
+                        <img src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png" alt="" className='cursor-pointer w-10 h-10 rounded-full'/>
+                    </li>
                 </ul>
             </nav>
             <Outlet/>
