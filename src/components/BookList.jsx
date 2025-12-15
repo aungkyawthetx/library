@@ -13,7 +13,7 @@ export default function Books() {
         "Fantasy": "bg-green-100 text-green-700",
         "Biography": "bg-blue-100 text-blue-700",
         "Thriller": "bg-red-100 text-red-700",
-        "Classic": "bg-gray-200 text-gray-700",
+        "Classic": "bg-fuchsia-200 text-fuchsia-700",
     };
     
     // errors state
@@ -32,9 +32,9 @@ export default function Books() {
                     <div className="text-start space-y-1 mt-3">
                         <h1 className='font-semibold uppercase'> {book.title} </h1>
                         <p className='text-gray-600 description'> {book.description} </p>
-                        <div className="flex flex-wrap">
+                        <div className="flex flex-wrap space-y-1">
                             {book.categories.map((genre) => (
-                                <span className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-full ${classes[genre] || 'bg-gray-100 text-gray-600'}`} key={genre}>
+                                <span className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-full ${classes[genre] || 'bg-gray-200 text-gray-700'}`} key={genre}>
                                     {genre}
                                 </span>
                             ))}

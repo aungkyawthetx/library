@@ -1,81 +1,112 @@
 {
-    "books": [
-        {
-            "id": "1",
-            "title": "Pride and Prejudice",
-            "description": "A classic tale of love, misunderstandings, and social expectations in 19th-century England, following the witty Elizabeth Bennet and the brooding Mr. Darcy.",
-            "categories": ["Romance"],
-            "cover": "https://m.media-amazon.com/images/I/51bsVdt2XcL._SY445_SX342_FMwebp_.jpg"
-        },
-        {
-            "id": "2",
-            "title": "Sapiens: A Brief History of Humankind",
-            "description": "Explores the history of human evolution, societies, and cultures from the Stone Age to modern times, offering deep insights into how humans shaped the world.",
-            "categories": ["History"],
-            "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1703329310i/23692271.jpg"
-        },
-        {
-            "id": "3",
-            "title": "The Great Gatsby",
-            "description": "Set in the roaring 1920s, this novel tells the tragic story of Jay Gatsby's obsessive love for Daisy Buchanan amidst wealth, decadence, and illusion.",
-            "categories": ["Romance"],
-            "cover": "https://m.media-amazon.com/images/I/61zQdr5W+kS._AC_SY300_SX300_QL70_FMwebp_.jpg"
-        },
-        {
-            "id": "4",
-            "title": "1776",
-            "description": "A detailed account of the American Revolutionary War, highlighting key figures and battles that shaped the birth of the United States.",
-            "categories": ["History"],
-            "cover": "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9780743226721/1776-9780743226721_lg.jpg"
-        },
-        {
-            "id": "5",
-            "title": "Me Before You",
-            "description": "A heartwarming and emotional story about Louisa Clark and her unexpected bond with a man facing life-altering circumstances, exploring love and personal growth.",
-            "categories": ["Romance"],
-            "cover": "https://images1.penguinrandomhouse.com/cover/9780143124542"
-        },
-        {
-            "id": "6",
-            "title": "The Silk Roads: A New History of the World",
-            "description": "Traces the historical networks of trade, culture, and ideas across Eurasia, showing how interconnected civilizations shaped world history.",
-            "categories": ["History"],
-            "cover": "https://m.media-amazon.com/images/I/91bLBRORmUL._SY342_.jpg"
-        },
-        {
-            "id": "7",
-            "title": "Dune",
-            "description": "A sweeping science-fiction epic about politics, destiny, and survival on the desert planet Arrakis.",
-            "categories": ["Sci-Fi"],
-            "cover": "https://m.media-amazon.com/images/I/81DMp7F91LL._SY425_.jpg"
-        },
-        {
-            "id": "8",
-            "title": "The Hobbit",
-            "description": "A classic fantasy adventure following Bilbo Baggins as he journeys with dwarves to reclaim a lost kingdom.",
-            "categories": ["Fantasy"],
-            "cover": "https://www.thebookdesigner.com/wp-content/uploads/2023/12/The-Hobbit-Book-Cover-with-Smaug.png"
-        },
-        {
-            "id": "9",
-            "title": "Steve Jobs",
-            "description": "A biography exploring the life, creativity, and ambition of Apple co-founder Steve Jobs.",
-            "categories": ["Biography"],
-            "cover": "https://m.media-amazon.com/images/I/41ZEWWyQDnL._SY445_SX342_FMwebp_.jpg"
-        },
-        {
-            "id": "10",
-            "title": "The Girl with the Dragon Tattoo",
-            "description": "A gripping thriller involving a journalist and a hacker diving into a dark family mystery.",
-            "categories": ["Thriller"],
-            "cover": "https://m.media-amazon.com/images/I/41sKIcU3DUL._SY445_SX342_FMwebp_.jpg"
-        },
-        {
-            "id": "11",
-            "title": "To Kill a Mockingbird",
-            "description": "A timeless classic exploring justice, morality, and human empathy through the eyes of a young girl.",
-            "categories": ["Classic"],
-            "cover": "https://m.media-amazon.com/images/I/81gepf1eMqL._SY466_.jpg"
-        }
-    ]
+  "books": [
+    {
+      "id": "1",
+      "title": "Pride and Prejudice",
+      "description": "A classic tale of love, misunderstandings, and social expectations in 19th-century England, following the witty Elizabeth Bennet and the brooding Mr. Darcy.",
+      "categories": [
+        "Romance"
+      ],
+      "cover": "https://m.media-amazon.com/images/I/51bsVdt2XcL._SY445_SX342_FMwebp_.jpg"
+    },
+    {
+      "id": "2",
+      "title": "Sapiens: A Brief History of Humankind",
+      "description": "Explores the history of human evolution, societies, and cultures from the Stone Age to modern times, offering deep insights into how humans shaped the world.",
+      "categories": [
+        "History"
+      ],
+      "cover": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1703329310i/23692271.jpg"
+    },
+    {
+      "id": "3",
+      "title": "The Great Gatsby",
+      "description": "Set in the roaring 1920s, this novel tells the tragic story of Jay Gatsby's obsessive love for Daisy Buchanan amidst wealth, decadence, and illusion.",
+      "categories": [
+        "Romance"
+      ],
+      "cover": "https://m.media-amazon.com/images/I/61zQdr5W+kS._AC_SY300_SX300_QL70_FMwebp_.jpg"
+    },
+    {
+      "id": "4",
+      "title": "1776",
+      "description": "A detailed account of the American Revolutionary War, highlighting key figures and battles that shaped the birth of the United States.",
+      "categories": [
+        "History"
+      ],
+      "cover": "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9780743226721/1776-9780743226721_lg.jpg"
+    },
+    {
+      "id": "5",
+      "title": "Me Before You",
+      "description": "A heartwarming and emotional story about Louisa Clark and her unexpected bond with a man facing life-altering circumstances, exploring love and personal growth.",
+      "categories": [
+        "Romance"
+      ],
+      "cover": "https://images1.penguinrandomhouse.com/cover/9780143124542"
+    },
+    {
+      "id": "6",
+      "title": "The Silk Roads: A New History of the World",
+      "description": "Traces the historical networks of trade, culture, and ideas across Eurasia, showing how interconnected civilizations shaped world history.",
+      "categories": [
+        "History"
+      ],
+      "cover": "https://m.media-amazon.com/images/I/91bLBRORmUL._SY342_.jpg"
+    },
+    {
+      "id": "7",
+      "title": "Dune",
+      "description": "A sweeping science-fiction epic about politics, destiny, and survival on the desert planet Arrakis.",
+      "categories": [
+        "Sci-Fi"
+      ],
+      "cover": "https://m.media-amazon.com/images/I/81DMp7F91LL._SY425_.jpg"
+    },
+    {
+      "id": "8",
+      "title": "The Hobbit",
+      "description": "A classic fantasy adventure following Bilbo Baggins as he journeys with dwarves to reclaim a lost kingdom.",
+      "categories": [
+        "Fantasy"
+      ],
+      "cover": "https://www.thebookdesigner.com/wp-content/uploads/2023/12/The-Hobbit-Book-Cover-with-Smaug.png"
+    },
+    {
+      "id": "9",
+      "title": "Steve Jobs",
+      "description": "A biography exploring the life, creativity, and ambition of Apple co-founder Steve Jobs.",
+      "categories": [
+        "Biography"
+      ],
+      "cover": "https://m.media-amazon.com/images/I/41ZEWWyQDnL._SY445_SX342_FMwebp_.jpg"
+    },
+    {
+      "id": "10",
+      "title": "The Girl with the Dragon Tattoo",
+      "description": "A gripping thriller involving a journalist and a hacker diving into a dark family mystery.",
+      "categories": [
+        "Thriller"
+      ],
+      "cover": "https://m.media-amazon.com/images/I/41sKIcU3DUL._SY445_SX342_FMwebp_.jpg"
+    },
+    {
+      "id": "11",
+      "title": "To Kill a Mockingbird",
+      "description": "A timeless classic exploring justice, morality, and human empathy through the eyes of a young girl.",
+      "categories": [
+        "Classic"
+      ],
+      "cover": "https://m.media-amazon.com/images/I/81gepf1eMqL._SY466_.jpg"
+    },
+    {
+      "id": "05cc",
+      "title": "Little Woman",
+      "description": "Little Women is a coming-of-age novel written by American novelist Louisa May Alcott, originally published in two volumes, in 1868 and 1869. The story follows the lives of the four March sisters—Meg, Jo, Beth, and Amy—and details their passage from childhood to womanhood.",
+      "categories": [
+        "Novel"
+      ],
+      "cover": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTQmecywbJWs9JclwhYULkb0fio8uiL2ui8LC47GkLjdZ0BZakdEKjJnAiygnplv17eyoiCmRRsmH-DMHqh5s4FEqxyIWR30bRfTbm14y9jW5VlMkNeWr1XCg"
+    }
+  ]
 }

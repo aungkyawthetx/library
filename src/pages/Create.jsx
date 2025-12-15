@@ -1,25 +1,50 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react';
+import useFetch from '../hooks/useFetch.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function Create() {
-
   let [title, setTitle] = useState('');
   let [description, setDescription ] = useState('');
   let [newCategory, setNewCategory] = useState('');
-  let [imageUrl, setImageUrl] = useState('');
+  let [cover, setCover] = useState('');
   let [categories, setCategories] = useState([]);
+  let [saving, setSaving] = useState(false);
 
-  const addCategory = (e) => {
+  let { setPostData, data: book, error} = useFetch('http://localhost:3001/books', 'POST');
+  let navigate = useNavigate();
+
+  let addCategory = (e) => {
     e.preventDefault();
     setCategories(prev => [newCategory, ...prev]);
     setNewCategory('');
   }
+
+  // add Book
+  let addBook = (e) => {
+    e.preventDefault();
+    let data = {
+      title, 
+      description,
+      categories,
+      cover
+    }
+    setPostData(data);
+    setSaving(true);
+  }
+
+  useEffect(() => {
+    if (book) {
+      navigate('/');
+    }
+    setSaving(false);
+  }, [book])
 
   return (
   <div>
     <p className="inline-block align-baseline font-bold text-pink-500 mb-2 text-lg">
       Create New Book
     </p>
-    <form className="bg-white shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-4 border border-gray-300">
+    <form className="bg-white shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-4 border border-gray-300" method='POST' onSubmit={addBook} >
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title"> Book Title </label>
         <input className="appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500" 
@@ -64,7 +89,7 @@ export default function Create() {
           </span>
         ))}
       </div>
-      <div className="mb-4">
+      <div className="mb-3">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="imageurl">
           Image URL
         </label>
@@ -73,13 +98,16 @@ export default function Create() {
           id="imageurl" 
           type="text" 
           placeholder="https://exampla.com/image.png"
-          value={imageUrl}  
-          onChange={e => setImageUrl(e.target.value)}
-          />
+          value={cover}  
+          onChange={e => setCover(e.target.value)}
+        />
       </div>
+
+      {error && <p className='text-red-500 italic mb-2 text-sm'>Something went wrong during book create.</p>}
+        
       <div className="flex items-center justify-between">
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline cursor-pointer" type="button">
-          Save Book
+        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline cursor-pointer">
+          {saving ? 'Saving...' : 'Save Book'}
         </button>
       </div>
     </form>
