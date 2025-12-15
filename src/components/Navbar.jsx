@@ -1,19 +1,21 @@
 import Profile from '../assets/profile.png';
 import { Link } from 'react-router-dom';
 import useTheme from '../hooks/useTheme';
+import lightIcon from '../assets/light.svg';
+import darkIcon from '../assets/dark.svg';
 
 export default function Navbar() {
     let {theme, changeTheme} = useTheme();
 
     return (
-    <nav onClick={changeTheme} className={`border-b border-gray-300 ${theme == 'dark' ? 'bg-amber-100' : 'bg-sky-50'}`}>
+    <nav className={`border-b border-gray-300`}>
         <ul className='flex justify-between items-center backdrop-blur-lg p-3 max-w-6xl mx-auto'>
             <li className='flex items-center gap-3'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
 
-                <input type="text" placeholder='Search books' className='outline-none'/>
+                <input type="text" placeholder='Search books' className='outline-none border-2 border-gray-300 px-2 py-1 rounded-xl focus:border-2 focus:border-pink-300'/>
             </li>
             <Link to='/' className='flex items-center gap-2 cursor-pointer md:-ml-32'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -29,6 +31,10 @@ export default function Navbar() {
                     <span className='hidden md:block'> Create </span>
                 </Link>
                 <img src={Profile} alt="" className='cursor-pointer w-10 h-10 rounded-full'/>
+                <div className='cursor-pointer'>
+                    {theme === 'dark' && <img src={lightIcon} alt="" className='w-6' onClick={() => changeTheme('light')}/>}
+                    {theme === 'light' && <img src={darkIcon} alt="" className='w-6' onClick={() => changeTheme('dark')}/>}
+                </div>
             </li>
         </ul>
     </nav>

@@ -23,7 +23,7 @@ export default function Books() {
 
   return (
     <div>
-        { loading && <p className='p-2 text-indigo-500 font-semibold'>Loading..</p> }
+        { loading && <p className='p-2 text-indigo-500 font-semibold'>Loading...</p> }
         {!!books && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-3">
                 {books.map((book) => (
