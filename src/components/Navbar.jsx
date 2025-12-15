@@ -1,11 +1,12 @@
-import React from 'react'
 import Profile from '../assets/profile.png';
 import { Link } from 'react-router-dom';
+import useTheme from '../hooks/useTheme';
 
 export default function Navbar() {
+    let theme = useTheme();
 
     return (
-    <nav className='border-b border-gray-300'>
+    <nav className={`border-b border-gray-300 ${theme == 'dark' ? 'bg-amber-100' : 'bg-sky-50'}`}>
         <ul className='flex justify-between items-center backdrop-blur-lg p-3 max-w-6xl mx-auto'>
             <li className='flex items-center gap-3'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
