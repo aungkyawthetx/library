@@ -1,7 +1,7 @@
 import Profile from '../assets/profile.png';
 import { Link } from 'react-router-dom';
 import useTheme from '../hooks/useTheme';
-import lightIcon from '../assets/light.svg';
+import lightIcon from '../assets/light.png';
 import darkIcon from '../assets/dark.svg';
 
 export default function Navbar() {
