@@ -1,36 +1,82 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function Create() {
+
+  let [title, setTitle] = useState('');
+  let [description, setDescription ] = useState('');
+  let [newCategory, setNewCategory] = useState('');
+  let [imageUrl, setImageUrl] = useState('');
+  let [categories, setCategories] = useState(['HTML', 'JS']);
+
   return (
-    <div>
-      <p class="inline-block align-baseline font-bold text-pink-500 mb-4 text-lg">
-        Create New Book
-      </p>
-      <form class="bg-white shadow rounded-2xl px-8 pt-6 pb-8 mb-4 border border-gray-200">
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-            Book Title
-          </label>
-          <input class="appearance-none border border-gray-200 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500" id="title" type="text" placeholder="Enter book title"/>
-        </div>
-        <div class="">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-            Description
-          </label>
-          <textarea class="appearance-none border border-gray-200 rounded-lg w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500" id="description"> </textarea>
-        </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-            Genre
-          </label>
-          <input class="appearance-none border border-gray-200 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500" id="title" type="text" placeholder="What's the book's genre?"/>
-        </div>
-        <div class="flex items-center justify-between">
-          <button class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" type="button">
-            Save Book
+  <div>
+    <p class="inline-block align-baseline font-bold text-pink-500 mb-2 text-lg">
+      Create New Book
+    </p>
+    <form class="bg-white shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-4 border border-gray-300">
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="title"> Book Title </label>
+        <input class="appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500" 
+          name="title"
+          id="title" 
+          type="text"
+          placeholder="Enter book title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
+      </div>
+      <div class="">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="description"> Description </label>
+        <textarea class="appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500" 
+          id="description"
+          name="description"
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+          > 
+        </textarea>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="categories"> Categories </label>
+        <div className='flex items-center gap-2'>
+          <input class="appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500" 
+            name="categories"
+            type="text"
+            id="categories"
+            placeholder="What's the book's genre?"
+            value={newCategory}
+            onChange={e => setNewCategory(e.target.value)}
+          />
+          <button className='bg-blue-500 text-white p-2 rounded-lg cursor-pointer' type='button'>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
           </button>
         </div>
-      </form>
-    </div>
+        {categories.map((genre) => (
+          <span className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-ful`} key={genre}>
+            {genre}
+          </span>
+        ))}
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="imageurl">
+          Image URL
+        </label>
+        <input class="appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500" 
+          name="imageurl"
+          id="imageurl" 
+          type="text" 
+          placeholder="https://exampla.com/image.png"
+          value={imageUrl}  
+          onChange={e => setImageUrl(e.target.value)}
+          />
+      </div>
+      <div class="flex items-center justify-between">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline cursor-pointer" type="button">
+          Save Book
+        </button>
+      </div>
+    </form>
+  </div>
   )
 }
