@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import useFetch from '../hooks/useFetch.js';
 import { useNavigate } from 'react-router-dom';
+import useTheme from '../hooks/useTheme.js';
 
 export default function Create() {
   let [title, setTitle] = useState('');
@@ -12,6 +13,7 @@ export default function Create() {
 
   let { setPostData, data: book, error} = useFetch('http://localhost:3001/books', 'POST');
   let navigate = useNavigate();
+  let { isDark } = useTheme();
 
   let addCategory = (e) => {
     e.preventDefault();
@@ -43,14 +45,14 @@ export default function Create() {
   }, [book, navigate])
 
   return (
-  <div>
-    <p className="inline-block align-baseline font-bold text-pink-500 mb-2 text-lg">
+  <div className='h-screen'>
+    <p className="inline-block align-baseline font-bold text-indigo-500 mb-2 text-lg">
       Create New Book
     </p>
-    <form className="bg-white shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-4 border border-gray-300" method='POST' onSubmit={addBook} >
+    <form className={`bg-white shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-4 border border-gray-300 ${isDark ? 'bg-zinc-900 text-gray-200 border-indigo-400 shadow-none' : '' }`} method='POST' onSubmit={addBook} >
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title"> Book Title </label>
-        <input className="appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500" 
+        <label className="block text-sm font-bold mb-2" htmlFor="title"> Book Title </label>
+        <input className={`${isDark ? 'placeholder:text-gray-400' : ''} border border-gray-300 rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500`} 
           name="title"
           id="title" 
           type="text"
@@ -61,20 +63,21 @@ export default function Create() {
         />
       </div>
       <div className="">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description"> Description </label>
-        <textarea className="appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500" 
+        <label className="block text-sm font-bold mb-2" htmlFor="description"> Description </label>
+        <textarea className={`${isDark ? 'placeholder:text-gray-400' : ''} border border-gray-300 rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500`}
           id="description"
           name="description"
           value={description}
           onChange={e => setDescription(e.target.value)}
+          placeholder='Enter book description'
           required
           > 
         </textarea>
       </div>
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="categories"> Categories </label>
+        <label className="block text-sm font-bold mb-2" htmlFor="categories"> Categories </label>
         <div className='flex items-center gap-2'>
-          <input className="appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500" 
+          <input className={`${isDark ? 'placeholder:text-gray-400' : ''} border border-gray-300 rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500`} 
             name="categories"
             type="text"
             id="categories"
@@ -96,10 +99,10 @@ export default function Create() {
         ))}
       </div>
       <div className="mb-3">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="imageurl">
+        <label className="block text-sm font-bold mb-2" htmlFor="imageurl">
           Image URL
         </label>
-        <input className="appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500" 
+        <input className={`${isDark ? 'placeholder:text-gray-400' : ''} border border-gray-300 rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500`}
           name="imageurl"
           id="imageurl" 
           type="text" 
