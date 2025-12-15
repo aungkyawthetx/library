@@ -36,8 +36,7 @@ export default function Create() {
     if (book) {
       navigate('/');
     }
-    setSaving(false);
-  }, [book])
+  }, [book, navigate])
 
   return (
   <div>
@@ -77,7 +76,7 @@ export default function Create() {
             value={newCategory}
             onChange={e => setNewCategory(e.target.value)}
           />
-          <button onClick={addCategory} className='bg-blue-500 text-white p-2 rounded-lg cursor-pointer' type='button'>
+          <button onClick={addCategory} className='bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full cursor-pointer' type='button'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
@@ -106,7 +105,7 @@ export default function Create() {
       {error && <p className='text-red-500 italic mb-2 text-sm'>Something went wrong during book create.</p>}
         
       <div className="flex items-center justify-between">
-        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline cursor-pointer">
+        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline cursor-pointer">
           {saving ? 'Saving...' : 'Save Book'}
         </button>
       </div>
