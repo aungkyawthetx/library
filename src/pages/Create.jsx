@@ -15,6 +15,10 @@ export default function Create() {
 
   let addCategory = (e) => {
     e.preventDefault();
+    if (newCategory && categories.includes(newCategory)) {
+      setNewCategory('');
+      return;
+    }
     setCategories(prev => [newCategory, ...prev]);
     setNewCategory('');
   }
@@ -53,6 +57,7 @@ export default function Create() {
           placeholder="Enter book title"
           value={title}
           onChange={e => setTitle(e.target.value)}
+          required
         />
       </div>
       <div className="">
@@ -62,6 +67,7 @@ export default function Create() {
           name="description"
           value={description}
           onChange={e => setDescription(e.target.value)}
+          required
           > 
         </textarea>
       </div>
@@ -75,6 +81,7 @@ export default function Create() {
             placeholder="What's the book's genre?"
             value={newCategory}
             onChange={e => setNewCategory(e.target.value)}
+            required
           />
           <button onClick={addCategory} className='bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full cursor-pointer' type='button'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -99,6 +106,7 @@ export default function Create() {
           placeholder="https://exampla.com/image.png"
           value={cover}  
           onChange={e => setCover(e.target.value)}
+          required
         />
       </div>
 
