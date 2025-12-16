@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import useTheme from '../hooks/useTheme';
 import { useEffect, useState } from 'react';
 import { db } from '../firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 
 
 export default function Books() {
@@ -24,7 +24,8 @@ export default function Books() {
 
     useEffect(function () {
         let ref = collection(db, 'books');
-        getDocs(ref).then(docs => {
+        let q = query(ref, orderBy('date', 'desc'));
+        getDocs(q).then(docs => {
             if (docs.empty) {
                 setError('Filed to fetch books.');
                 setLoading(false);
