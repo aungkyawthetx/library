@@ -1,13 +1,13 @@
-import useFetch from '../hooks/useFetch.js';
 import { Link } from 'react-router-dom';
 import useTheme from '../hooks/useTheme';
+import { useEffect, useState } from 'react';
+import { db } from '../firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 
 export default function Books() {
-
-    let {isDark} = useTheme();
-    let { data : books, loading, error } = useFetch('http://localhost:3001/books');
-
+    let { isDark } = useTheme();
+    
     const classes = {
         "Romance": "bg-pink-100 text-pink-700",
         "History": "bg-yellow-100 text-yellow-700",
@@ -17,11 +17,22 @@ export default function Books() {
         "Thriller": "bg-red-100 text-red-700",
         "Classic": "bg-fuchsia-200 text-fuchsia-700",
     };
-    
-    // errors state
-    if (error) {
-        return <p> {error} </p>
-    }
+
+    let [error, setError] = useState('');
+    let [books, setBooks] = useState([]);
+    let [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        let ref = collection(db, 'books');
+        getDocs(ref).then(docs => {
+            let books = [];
+            docs.forEach(doc => {
+                let book = { id: doc.id, ...doc.data() };
+                books.push(book);
+            });
+            setBooks(books);
+        })
+    }, []);
 
   return (
     <div>
