@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import useTheme from '../hooks/useTheme';
 import { useEffect, useState } from 'react';
 import { db } from '../firebase';
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, orderBy, query } from 'firebase/firestore';
+import Trash from '../assets/trash.svg';
 
 
 export default function Books() {
@@ -44,6 +45,13 @@ export default function Books() {
         })
     }, []);
 
+    const deleteBook = async (e, id) => {
+        e.preventDefault();
+        let ref = doc(db, 'books', id);
+        await deleteDoc(ref);
+        setBooks(prev => prev.filter(b => b.id !== id));
+    }
+
   return (
     <div>
         {error && <p className='text-red-400 italic'> {error} </p>}
@@ -56,12 +64,17 @@ export default function Books() {
                     <div className="text-start space-y-1 mt-3">
                         <h1 className={`${isDark ? 'text-indigo-300' : ''} font-semibold uppercase`}> {book.title} </h1>
                         <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} description`}> {book.description} </p>
-                        <div className="flex flex-wrap space-y-1">
-                            {book.categories.map((genre) => (
-                                <span className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-full ${classes[genre] || 'bg-gray-200 text-gray-700'}`} key={genre}>
-                                    {genre}
-                                </span>
-                            ))}
+                        <div className="flex justify-between flex-wrap space-y-1 items-center">
+                           <div>
+                                {book.categories.map((genre) => (
+                                    <span className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-full ${classes[genre] || 'bg-gray-200 text-gray-700'}`} key={genre}>
+                                        {genre}
+                                    </span>
+                                ))}
+                           </div>
+                            <div onClick={(e) => deleteBook(e, book.id)}>
+                                <img src={Trash} alt="trash icon"/>
+                            </div>
                         </div>
                     </div>
                 </Link>
