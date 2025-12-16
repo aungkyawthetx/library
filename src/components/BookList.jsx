@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { collection, deleteDoc, doc, getDocs, orderBy, query } from 'firebase/firestore';
 import Trash from '../assets/trash.svg';
+import Pancel from '../assets/edit.svg';
 
 
 export default function Books() {
@@ -72,8 +73,11 @@ export default function Books() {
                                     </span>
                                 ))}
                            </div>
-                            <div onClick={(e) => deleteBook(e, book.id)}>
-                                <img src={Trash} alt="trash icon"/>
+                            <div className='flex space-x-2 items-center'>
+                                <Link to={`edit/${book.id}`} >
+                                    <img src={Pancel} alt="pancel icon"/>
+                                </Link>
+                                <img onClick={(e) => deleteBook(e, book.id)} src={Trash} alt="trash icon"/>
                             </div>
                         </div>
                     </div>
