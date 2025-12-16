@@ -43,7 +43,7 @@ export default function BookDetails() {
       {loading && <p className='text-indigo-500 fw-semibold'>Loading... </p>}
       {book && (
       <div className={`max-w-6xl mx-auto p-4 h-screen ${isDark ? 'text-white' : ''}`}>
-        <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 bg-white rounded-2xl shadow-md p-6 border border-gray-200 ${isDark ? 'bg-zinc-900 border-indigo-400 shadow-none' : ''}`}>
+        <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 bg-white rounded-2xl shadow-md p-6 border border-gray-200 ${isDark ? 'bg-zinc-900 border-indigo-300 shadow-none' : ''}`}>
           <div className="flex justify-center">
             <img
               src={book.cover}

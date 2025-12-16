@@ -51,7 +51,7 @@ export default function Books() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-3">
                 {books.map((book) => (
                 <Link to={`/books/${book.id}`} className={`p-4 border border-gray-200 rounded shadow ${isDark ? 'bg-zinc-900 border-indigo-400' : ''}`} key={book.id}>
-                    <img src={book.cover} alt="" className="h-80 w-full border border-gray-200 rounded-lg"/>
+                        <img src={book.cover} alt="" className={`h-80 w-full border border-gray-200 rounded-lg ${isDark && 'border-none'}`} />
                     <div className="text-start space-y-1 mt-3">
                         <h1 className={`${isDark ? 'text-indigo-300' : ''} font-semibold uppercase`}> {book.title} </h1>
                         <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} description`}> {book.description} </p>

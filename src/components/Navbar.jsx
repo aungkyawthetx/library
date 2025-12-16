@@ -24,7 +24,7 @@ export default function Navbar() {
                 <span className={`text-2xl ${isDark ? 'text-white' :'text-pink-500'} font-bold hidden md:block`}> Shelfio </span>
             </Link>
             <li className='flex items-center gap-2'>
-                <Link to="/create" className='bg-pink-400 hover:bg-pink-500 text-white px-3 py-2 rounded-full cursor-pointer flex items-center gap-1'>
+                <Link to="/create" className={`text-white px-3 py-2 rounded-full cursor-pointer flex items-center gap-1 ${isDark ? 'bg-indigo-400 hover:bg-indigo-500' : 'bg-pink-400 hover:bg-pink-500' }`}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>

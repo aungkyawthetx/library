@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import useFetch from '../hooks/useFetch.js';
+import { useState } from 'react';
 import useTheme from '../hooks/useTheme.js';
 import { useNavigate } from 'react-router-dom';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { db } from '../firebase/index.js';
 
 export default function Create() {
   let [title, setTitle] = useState('');
@@ -11,7 +12,6 @@ export default function Create() {
   let [newCategory, setNewCategory] = useState('');
   let [description, setDescription ] = useState('');
 
-  let { setPostData, data: book, error} = useFetch('http://localhost:3001/books', 'POST');
   let navigate = useNavigate();
   let { isDark } = useTheme();
 
@@ -32,21 +32,18 @@ export default function Create() {
       title, 
       description,
       categories,
-      cover
+      cover,
+      date : serverTimestamp()
     }
-    setPostData(data);
+    let ref = collection(db, 'books');
+    addDoc(ref, data);
+    navigate('/');
     setSaving(true);
   }
 
-  useEffect(() => {
-    if (book) {
-      navigate('/');
-    }
-  }, [book, navigate])
-
   return (
   <div className='h-screen'>
-    <p className="inline-block align-baseline font-bold text-indigo-500 mb-2 text-lg">
+    <p className={`inline-block align-baseline font-bold mb-2 text-lg ${isDark ? 'text-indigo-400' : 'text-pink-400' }`}>
       Create New Book
     </p>
     <form className={`bg-white shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-4 border border-gray-300 ${isDark ? 'bg-zinc-900 text-gray-200 border-indigo-400 shadow-none' : '' }`} method='POST' onSubmit={addBook} >
@@ -84,9 +81,8 @@ export default function Create() {
             placeholder="What's the book's genre?"
             value={newCategory}
             onChange={e => setNewCategory(e.target.value)}
-            required
           />
-          <button onClick={addCategory} className='bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full cursor-pointer' type='button'>
+          <button onClick={addCategory} className={`${isDark ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-pink-400 hover:bg-pink-500' } text-white p-2 rounded-full cursor-pointer`} type='button'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
@@ -112,11 +108,8 @@ export default function Create() {
           required
         />
       </div>
-
-      {error && <p className='text-red-500 italic mb-2 text-sm'>Something went wrong during book create.</p>}
-        
       <div className="flex items-center justify-between">
-        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline cursor-pointer">
+        <button type="submit" className={`${isDark ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-pink-400 hover:bg-pink-500' } text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline cursor-pointer`}>
           {saving ? 'Saving...' : 'Save Book'}
         </button>
       </div>
