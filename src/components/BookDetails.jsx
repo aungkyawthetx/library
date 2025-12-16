@@ -54,11 +54,13 @@ export default function BookDetails() {
 
           <div className="md:col-span-2 space-y-4">
             <h1 className={`text-3xl font-bold text-gray-700 uppercase ${isDark ? 'text-indigo-400' : ''}`}> {book.title} </h1>
-            {book.categories.map((genre) => (
-              <span className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-full ${classes[genre] || 'bg-gray-100 text-gray-600'}`} key={genre}>
-                {genre}
-              </span>
-            ))}
+              <div className='flex gap-2'>
+                {book.categories.map((genre) => (
+                  <span className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-full ${classes[genre] || 'bg-indigo-200 text-indigo-700'}`} key={genre}>
+                    {genre}
+                  </span>
+                ))}
+              </div>
             <p className={`leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
               {book.description}
             </p>
