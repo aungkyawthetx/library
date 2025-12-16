@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import useFetch from '../hooks/useFetch.js';
-import { useNavigate } from 'react-router-dom';
 import useTheme from '../hooks/useTheme.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function Create() {
   let [title, setTitle] = useState('');
-  let [description, setDescription ] = useState('');
-  let [newCategory, setNewCategory] = useState('');
   let [cover, setCover] = useState('');
-  let [categories, setCategories] = useState([]);
   let [saving, setSaving] = useState(false);
+  let [categories, setCategories] = useState([]);
+  let [newCategory, setNewCategory] = useState('');
+  let [description, setDescription ] = useState('');
 
   let { setPostData, data: book, error} = useFetch('http://localhost:3001/books', 'POST');
   let navigate = useNavigate();
