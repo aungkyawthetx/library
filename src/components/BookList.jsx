@@ -20,22 +20,32 @@ export default function Books() {
 
     let [error, setError] = useState('');
     let [books, setBooks] = useState([]);
-    let [loading, setLoading] = useState(false);
+    let [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+    useEffect(function () {
         let ref = collection(db, 'books');
         getDocs(ref).then(docs => {
-            let books = [];
-            docs.forEach(doc => {
-                let book = { id: doc.id, ...doc.data() };
-                books.push(book);
-            });
-            setBooks(books);
+            if (docs.empty) {
+                setError('Filed to fetch books.');
+                setLoading(false);
+            }
+            else {
+                let books = [];
+
+                docs.forEach(doc => {
+                    let book = { id: doc.id, ...doc.data() };
+                    books.push(book);
+                });
+                setBooks(books);
+                setLoading(false);
+                setError('');
+            }
         })
     }, []);
 
   return (
     <div>
+        {error && <p className='text-red-400 italic'> {error} </p>}
         { loading && <p className='p-2 text-indigo-500 font-semibold'>Loading...</p> }
         {!!books && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-3">

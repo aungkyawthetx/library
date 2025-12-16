@@ -1,11 +1,31 @@
 import { useParams } from 'react-router-dom'
-import useFetch from '../hooks/useFetch';
 import useTheme from '../hooks/useTheme';
+import { useEffect, useState } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 export default function BookDetails() {
   let { id } = useParams();
-  let { data: book, loading, error } = useFetch(`http://localhost:3001/books/${id}`);
+  let [error, setError] = useState('');
+  let [book, setBook] = useState(null);
+  let [loading, setLoading] = useState(true);
   let { isDark } = useTheme();
+
+  useEffect(() => {
+    let ref = doc(db, 'books', id);
+    getDoc(ref).then(doc => {
+      if (doc.exists()) {
+        let book = { id: doc.id, ...doc.data() };
+        setBook(book);
+        setLoading(false);
+        setError('');
+      }
+      else {
+        setError('No document found.');
+        setLoading(false);
+      }
+    })
+  }, [id]);
 
   const classes = {
     "Romance": "bg-pink-100 text-pink-700",
@@ -19,7 +39,7 @@ export default function BookDetails() {
 
   return (
     <>
-      {error && <p className='text-red-500 fw-semibold'> {error.message} </p>}
+      {error && <p className='text-red-500 fw-semibold'> { error } </p>}
       {loading && <p className='text-indigo-500 fw-semibold'>Loading... </p>}
       {book && (
       <div className={`max-w-6xl mx-auto p-4 h-screen ${isDark ? 'text-white' : ''}`}>
