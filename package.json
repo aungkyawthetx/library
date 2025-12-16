@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "dev" : "json-server -w src/data/db.json --port=3001",
+    "dev": "json-server -w src/data/db.json --port=3001",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
+    "firebase": "^12.6.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.10.1",
