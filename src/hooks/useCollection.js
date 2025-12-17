@@ -1,15 +1,22 @@
-import { useEffect, useState } from "react";
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { useEffect, useRef, useState } from "react";
+import { collection, onSnapshot, query, orderBy, where } from "firebase/firestore";
 import { db } from "../firebase";
 
-export function useCollection(colName) {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
-
+export function useCollection(colName, _q) {
+    let qRef = useRef(_q).current;
+    console.log(qRef);
+    const [data, setData] = useState([]);
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(true);
+    
     useEffect(() => {
-        const ref = collection(db, colName)
-        const q = query(ref, orderBy("date", "desc"))
+        const ref = collection(db, colName);
+        let queries = [];
+        if (qRef) {
+            queries.push(where(...qRef))
+        }
+        queries.push(orderBy('date', 'desc'));
+        const q = query(ref, ...queries);
         onSnapshot(q, docs => {
             if (docs.empty) {
                 setError('Filed to fetch books.');
@@ -26,7 +33,7 @@ export function useCollection(colName) {
                 setError('');
             }
         });
-  }, [colName])
+  }, [colName, qRef])
 
   return { data, loading, error }
 }

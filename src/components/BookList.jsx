@@ -4,6 +4,8 @@ import Trash from '../assets/trash.svg';
 import Pancel from '../assets/edit.svg';
 import useFirestore from '../hooks/useFirestore';
 import { useCollection } from '../hooks/useCollection';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function Books() {
     let { isDark } = useTheme();
@@ -19,8 +21,9 @@ export default function Books() {
     };
 
     let { deleteDocument } = useFirestore();
-
-    let { error, loading, data: books } = useCollection('books');
+    
+    let { user } = useContext(AuthContext);
+    let { error, loading, data: books } = useCollection('books', ['uid', '==', user.uid]);
 
     const deleteBook = async (e, id) => {
         e.preventDefault();
