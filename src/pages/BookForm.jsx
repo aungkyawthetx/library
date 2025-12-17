@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import useTheme from '../hooks/useTheme.js';
 import { useNavigate, useParams } from 'react-router-dom';
-import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase/index.js';
 import useFirestore from '../hooks/useFirestore.js';
 
@@ -12,34 +12,30 @@ export default function Create() {
   let [categories, setCategories] = useState([]);
   let [newCategory, setNewCategory] = useState('');
   let [description, setDescription] = useState('');
-  let [isEdit, setIsEdit] = useState(false);
+
+  const isEdit = Boolean(id);
 
   let { updateDocument, addCollection } = useFirestore();
   
   useEffect(() => {
-    if (id) {
-      // edit form
-      setIsEdit(true);
-      let ref = doc(db, 'books', id);
-      getDoc(ref).then(doc => {
-        if (doc.exists()) {
-          let {title, description, categories, cover} = doc.data();
-          setTitle(title);
-          setDescription(description);
-          setCategories(categories);
-          setCover(cover);
-        }
-      });
+    if (!isEdit) {
+      // setTitle('');
+      // setDescription('');
+      // setCategories([]);
+      // setCover('');
+      return;
     }
-    else {
-      // create form
-      setIsEdit(false);
-      setTitle('');
-      setDescription('');
-      setCategories([]);
-      setCover('');
-    }
-  }, [id]);
+    const ref = doc(db, 'books', id);
+    getDoc(ref).then(doc => {
+      if (doc.exists()) {
+        let {title, description, categories, cover} = doc.data();
+        setTitle(title);
+        setDescription(description);
+        setCategories(categories);
+        setCover(cover);
+      }
+    });
+  }, [id, isEdit]);
 
   let navigate = useNavigate();
   let { isDark } = useTheme();

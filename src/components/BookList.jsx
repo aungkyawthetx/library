@@ -1,12 +1,12 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useTheme from '../hooks/useTheme';
 import Trash from '../assets/trash.svg';
 import Pancel from '../assets/edit.svg';
 import useFirestore from '../hooks/useFirestore';
+import { useCollection } from '../hooks/useCollection';
 
 export default function Books() {
     let { isDark } = useTheme();
-    let navigate = useNavigate();
     
     const classes = {
         "Romance": "bg-pink-100 text-pink-700",
@@ -18,9 +18,9 @@ export default function Books() {
         "Classic": "bg-fuchsia-200 text-fuchsia-700",
     };
 
-    let { getCollection, deleteDocument } = useFirestore();
+    let { deleteDocument } = useFirestore();
 
-    let { error, loading, data: books } = getCollection('books');
+    let { error, loading, data: books } = useCollection('books');
 
     const deleteBook = async (e, id) => {
         e.preventDefault();
@@ -48,9 +48,9 @@ export default function Books() {
                                 ))}
                            </div>
                             <div className='flex space-x-2 items-center'>
-                                <button onClick={() => navigate(`books/edit/${book.id}`)} className='cursor-pointer'>
+                                <Link to={`books/edit/${book.id}`} className='cursor-pointer' type='button'>
                                     <img src={Pancel} alt="pancel icon"/>
-                                </button>
+                                </Link>
                                 <img onClick={(e) => deleteBook(e, book.id)} src={Trash} alt="trash icon"/>
                             </div>
                         </div>

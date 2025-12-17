@@ -1,11 +1,10 @@
 import { useParams } from 'react-router-dom'
 import useTheme from '../hooks/useTheme';
-import useFirestore from '../hooks/useFirestore';
+import { useDocument } from '../hooks/useDocument';
 
 export default function BookDetails() {
   let { id } = useParams();
-  let { getDocument } = useFirestore();
-  let { error, loading, data: book } = getDocument('books', id);
+  let { error, loading, data: book } = useDocument('books', id);
   let { isDark } = useTheme();
 
   const classes = {
