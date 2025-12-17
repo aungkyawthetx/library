@@ -4,7 +4,6 @@ import { db } from "../firebase";
 
 export function useCollection(colName, _q) {
     let qRef = useRef(_q).current;
-    console.log(qRef);
     const [data, setData] = useState([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
