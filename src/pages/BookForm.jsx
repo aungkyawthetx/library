@@ -3,6 +3,7 @@ import useTheme from '../hooks/useTheme.js';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/index.js';
+import useFirestore from '../hooks/useFirestore.js';
 
 export default function Create() {
   let { id } = useParams();
@@ -12,6 +13,8 @@ export default function Create() {
   let [newCategory, setNewCategory] = useState('');
   let [description, setDescription] = useState('');
   let [isEdit, setIsEdit] = useState(false);
+
+  let { updateDocument, addCollection } = useFirestore();
   
   useEffect(() => {
     if (id) {
@@ -62,12 +65,10 @@ export default function Create() {
       date: serverTimestamp()
     }
     if (isEdit) {
-      let ref = doc(db, 'books', id);
-      await updateDoc(ref, data);
+      await updateDocument('books', id, data);
     }
     else {
-      let ref = collection(db, 'books');
-      await addDoc(ref, data);
+      await addCollection('books', data);
     }
 
     navigate('/');

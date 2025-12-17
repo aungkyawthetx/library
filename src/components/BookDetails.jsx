@@ -1,31 +1,12 @@
 import { useParams } from 'react-router-dom'
 import useTheme from '../hooks/useTheme';
-import { useEffect, useState } from 'react';
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
-import { db } from '../firebase';
+import useFirestore from '../hooks/useFirestore';
 
 export default function BookDetails() {
   let { id } = useParams();
-  let [error, setError] = useState('');
-  let [book, setBook] = useState(null);
-  let [loading, setLoading] = useState(true);
+  let { getDocument } = useFirestore();
+  let { error, loading, data: book } = getDocument('books', id);
   let { isDark } = useTheme();
-
-  useEffect(() => {
-    let ref = doc(db, 'books', id);
-    onSnapshot(ref, doc => {
-      if (doc.exists()) {
-        let book = { id: doc.id, ...doc.data() };
-        setBook(book);
-        setLoading(false);
-        setError('');
-      }
-      else {
-        setError('No document found.');
-        setLoading(false);
-      }
-    })
-  }, [id]);
 
   const classes = {
     "Romance": "bg-pink-100 text-pink-700",
