@@ -1,14 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useTheme from '../hooks/useTheme';
 import { useEffect, useState } from 'react';
 import { db } from '../firebase';
-import { collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query } from 'firebase/firestore';
 import Trash from '../assets/trash.svg';
 import Pancel from '../assets/edit.svg';
 
 
 export default function Books() {
     let { isDark } = useTheme();
+    let navigate = useNavigate();
     
     const classes = {
         "Romance": "bg-pink-100 text-pink-700",
@@ -74,9 +75,9 @@ export default function Books() {
                                 ))}
                            </div>
                             <div className='flex space-x-2 items-center'>
-                                <Link to={`edit/${book.id}`} >
+                                <button onClick={() => navigate(`books/edit/${book.id}`)} className='cursor-pointer'>
                                     <img src={Pancel} alt="pancel icon"/>
-                                </Link>
+                                </button>
                                 <img onClick={(e) => deleteBook(e, book.id)} src={Trash} alt="trash icon"/>
                             </div>
                         </div>

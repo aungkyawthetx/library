@@ -4,10 +4,14 @@ import useTheme from '../hooks/useTheme';
 import lightIcon from '../assets/light.png';
 import darkIcon from '../assets/dark.svg';
 import useSignout from '../hooks/useSignout';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function Navbar() {
     let { changeTheme, isDark } = useTheme();
     let navigate = useNavigate();
+    let { user } = useContext(AuthContext);
+
     let { logOut } = useSignout();
 
     let sighOutuser = async () => {
@@ -43,8 +47,14 @@ export default function Navbar() {
                         {isDark && <img src={lightIcon} alt="" className='w-6' onClick={() => changeTheme('light')}/>}
                         {!isDark && <img src={darkIcon} alt="" className='w-6' onClick={() => changeTheme('dark')}/>}
                     </div>
-                    <div>
-                        <button onClick={sighOutuser} className='bg-red-500 text-white rounded-lg px-2 py-2 text-sm cursor-pointer'> Logout </button>
+                    <div className='space-x-3'>
+                        {!user &&
+                            <>
+                                <Link to={`/login`} className='bg-blue-500 text-white rounded-lg px-2 py-2 text-sm cursor-pointer'> Login </Link>
+                                <Link to={`/register`} className='bg-indigo-500 text-white rounded-lg px-2 py-2 text-sm cursor-pointer'> Register </Link>
+                            </>
+                        }
+                        {!!user && <button onClick={sighOutuser} className='bg-red-500 text-white rounded-lg px-2 py-2 text-sm cursor-pointer'> Logout </button>}
                     </div>
                 </li>
             </ul>
