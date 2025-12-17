@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import Home from '../pages/Home.jsx';
 import Search from '../pages/Search.jsx';
 import Register from '../pages/Register.jsx';
@@ -10,6 +10,9 @@ import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext.jsx';
 
 export default function Index() {
+    let { authReady, user } = useContext(AuthContext);
+
+    const isAuthenticated = Boolean(user);
 
     const router = createBrowserRouter([
         {
@@ -18,40 +21,33 @@ export default function Index() {
             children: [
                 {
                     path: '',
-                    element: <Home/>
+                    element: isAuthenticated ? <Home/> : <Navigate to='/login'/>
                 },
                 {
                     path: '/create',
-                    element: <BookForm/>
+                    element: isAuthenticated ? <BookForm/> : <Navigate to='/login'/>
                 },
                 {
                     path: '/edit/:id',
-                    element: <BookForm/>
-                },
-                {
-                    path: '/search',
-                    element: <Search/>
+                    element: isAuthenticated ? <BookForm/> : <Navigate to='/login'/>
                 },
                 {
                     path: '/books/:id',
-                    element: <BookDetails/>
+                    element: isAuthenticated ? <BookDetails/> : <Navigate to='/login'/>
                 },
                 {
                     path: '/register',
-                    element: <Register/>
+                    element: !isAuthenticated ? <Register/> : <Navigate to='/'/>
                 },
                 {
                     path: '/login',
-                    element: <Login/>
+                    element: !isAuthenticated ? <Login/> : <Navigate to='/'/>
                 },
             ]
         }
     ]);
-
-    let { authReady } = useContext(AuthContext);
     
-    return (
-        
+    return (        
         authReady && <RouterProvider router={router}/>
     )
 }
