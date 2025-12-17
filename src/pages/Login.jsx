@@ -12,8 +12,8 @@ export default function Login() {
 
     const Login = async (e) => {
         e.preventDefault();
-        
         let user = await signIn(email, password);
+        console.log(user);
         navigate('/');
     }
 
