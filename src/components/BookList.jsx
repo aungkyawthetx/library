@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import useTheme from '../hooks/useTheme';
 import { useEffect, useState } from 'react';
 import { db } from '../firebase';
-import { collection, deleteDoc, doc, getDocs, orderBy, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
 import Trash from '../assets/trash.svg';
 import Pancel from '../assets/edit.svg';
 
@@ -27,7 +27,7 @@ export default function Books() {
     useEffect(function () {
         let ref = collection(db, 'books');
         let q = query(ref, orderBy('date', 'desc'));
-        getDocs(q).then(docs => {
+        onSnapshot(q, docs => {
             if (docs.empty) {
                 setError('Filed to fetch books.');
                 setLoading(false);
@@ -43,14 +43,14 @@ export default function Books() {
                 setLoading(false);
                 setError('');
             }
-        })
+        });
     }, []);
 
     const deleteBook = async (e, id) => {
         e.preventDefault();
         let ref = doc(db, 'books', id);
         await deleteDoc(ref);
-        setBooks(prev => prev.filter(b => b.id !== id));
+        // setBooks(prev => prev.filter(b => b.id !== id));
     }
 
   return (
