@@ -12,8 +12,9 @@ export default function Register() {
     const registerUser = async (e) => {
         e.preventDefault();
         let user = await signUp(email, password);
-        console.log(user);
-        navigate('/');
+        if (user) {
+            navigate('/');
+        }
     }
 
     return (
