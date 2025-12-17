@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import useTheme from '../hooks/useTheme.js';
 import { useNavigate, useParams } from 'react-router-dom';
-import { addDoc, collection, doc, getDoc, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/index.js';
 
 export default function Create() {
@@ -52,17 +52,24 @@ export default function Create() {
   }
 
   // add Book
-  let addBook = (e) => {
+  let handleSubmit = async (e) => {
     e.preventDefault();
     let data = {
-      title, 
+      title,
       description,
       categories,
       cover,
-      date : serverTimestamp()
+      date: serverTimestamp()
     }
-    let ref = collection(db, 'books');
-    addDoc(ref, data);
+    if (isEdit) {
+      let ref = doc(db, 'books', id);
+      await updateDoc(ref, data);
+    }
+    else {
+      let ref = collection(db, 'books');
+      await addDoc(ref, data);
+    }
+
     navigate('/');
   }
 
@@ -71,7 +78,7 @@ export default function Create() {
     <p className={`inline-block align-baseline font-bold mb-2 text-lg ${isDark ? 'text-indigo-400' : 'text-pink-400' }`}>
       Create New Book
     </p>
-    <form className={`bg-white shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-4 border border-gray-300 ${isDark ? 'bg-zinc-900 text-gray-200 border-indigo-400 shadow-none' : '' }`} method='POST' onSubmit={addBook} >
+    <form className={`bg-white shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-4 border border-gray-300 ${isDark ? 'bg-zinc-900 text-gray-200 border-indigo-400 shadow-none' : '' }`} method='POST' onSubmit={handleSubmit} >
       <div className="mb-4">
         <label className="block text-sm font-bold mb-2" htmlFor="title"> Book Title </label>
         <input className={`${isDark ? 'placeholder:text-gray-400' : ''} border border-gray-300 rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500`} 
