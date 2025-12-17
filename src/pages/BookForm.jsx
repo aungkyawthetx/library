@@ -12,6 +12,8 @@ export default function Create() {
   let [categories, setCategories] = useState([]);
   let [newCategory, setNewCategory] = useState('');
   let [description, setDescription] = useState('');
+  let navigate = useNavigate();
+  let { isDark } = useTheme();
 
   const isEdit = Boolean(id);
 
@@ -19,12 +21,9 @@ export default function Create() {
   
   useEffect(() => {
     if (!isEdit) {
-      // setTitle('');
-      // setDescription('');
-      // setCategories([]);
-      // setCover('');
       return;
     }
+    
     const ref = doc(db, 'books', id);
     getDoc(ref).then(doc => {
       if (doc.exists()) {
@@ -36,9 +35,6 @@ export default function Create() {
       }
     });
   }, [id, isEdit]);
-
-  let navigate = useNavigate();
-  let { isDark } = useTheme();
 
   let addCategory = (e) => {
     e.preventDefault();
@@ -57,8 +53,7 @@ export default function Create() {
       title,
       description,
       categories,
-      cover,
-      date: serverTimestamp()
+      cover
     }
     if (isEdit) {
       await updateDocument('books', id, data);
@@ -66,7 +61,6 @@ export default function Create() {
     else {
       await addCollection('books', data);
     }
-
     navigate('/');
   }
 
