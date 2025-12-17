@@ -34,7 +34,7 @@ export default function BookDetails() {
     "Fantasy": "bg-green-100 text-green-700",
     "Biography": "bg-blue-100 text-blue-700",
     "Thriller": "bg-red-100 text-red-700",
-    "Classic": "bg-gray-200 text-gray-700",
+    "Classic": "bg-fuchsia-200 text-fuchsia-700",
   };
 
   return (
