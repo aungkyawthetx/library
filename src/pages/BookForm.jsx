@@ -9,7 +9,8 @@ import { AuthContext } from '../contexts/AuthContext.jsx';
 export default function Create() {
   let { id } = useParams();
   let [title, setTitle] = useState('');
-  let [cover, setCover] = useState('');
+  let [file, setFile] = useState(null);
+  let [preview, setPreview] = useState('');
   let [categories, setCategories] = useState([]);
   let [newCategory, setNewCategory] = useState('');
   let [description, setDescription] = useState('');
@@ -28,11 +29,10 @@ export default function Create() {
     const ref = doc(db, 'books', id);
     getDoc(ref).then(doc => {
       if (doc.exists()) {
-        let {title, description, categories, cover} = doc.data();
+        let {title, description, categories} = doc.data();
         setTitle(title);
         setDescription(description);
         setCategories(categories);
-        setCover(cover);
       }
     });
   }, [id, isEdit]);
@@ -56,7 +56,6 @@ export default function Create() {
       title,
       description,
       categories,
-      cover,
       uid: user.uid
     }
     if (isEdit) {
@@ -67,6 +66,24 @@ export default function Create() {
     }
     navigate('/');
   }
+
+  let handleChangedImage = (e) => {
+    setFile(e.target.files[0]);
+  }
+
+  let handlePreviewImage = (file) => {
+    let reader = new FileReader;
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setPreview(reader.result);
+    }
+  }
+
+  useEffect(() => {
+    if (file) {
+      handlePreviewImage(file);
+    }
+  }, [file])
 
   return (
   <div className='h-screen'>
@@ -123,17 +140,16 @@ export default function Create() {
       </div>
       <div className="mb-3">
         <label className="block text-sm font-bold mb-2" htmlFor="imageurl">
-          Image URL
+          Cover Image
         </label>
-        <input className={`${isDark ? 'placeholder:text-gray-400' : ''} border border-gray-300 rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500`}
+        <input className={`${isDark ? 'placeholder:text-gray-400' : ''} border border-gray-300 rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500 cursor-pointer`}
           name="imageurl"
           id="imageurl" 
-          type="text" 
-          placeholder="https://exampla.com/image.png"
-          value={cover}  
-          onChange={e => setCover(e.target.value)}
+          type="file"
+          onChange={handleChangedImage}
           required
         />
+        {preview && <img src={preview} className='h-25 mt-2 rounded' alt="Preview Image" />}
       </div>
       <div className="flex items-center justify-between">
         <button type="submit" className={`${isDark ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-pink-400 hover:bg-pink-500' } text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline cursor-pointer`}>
