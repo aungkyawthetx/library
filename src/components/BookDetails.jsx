@@ -2,12 +2,12 @@ import { useParams } from 'react-router-dom'
 import useTheme from '../hooks/useTheme';
 import { useDocument } from '../hooks/useDocument';
 import Profile from '../assets/profile.png';
+import NoteForm from './NoteForm';
 
 export default function BookDetails() {
   let { id } = useParams();
   let { error, loading, data: book } = useDocument('books', id);
   let { isDark } = useTheme();
-
   const classes = {
     "Romance": "bg-pink-100 text-pink-700",
     "History": "bg-yellow-100 text-yellow-700",
@@ -50,9 +50,9 @@ export default function BookDetails() {
           </div>
         </div>
         <div>
-          <h3 className='text-indigo-500 text-xl font-bold my-3'>My Notes</h3>
-          <textarea className='shadow-sm bg-gray-100 w-full border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:border-indigo-500 placeholder:italic' placeholder='Enter your notes...' name="" id="" rows="5"></textarea>
-          <div className='border border-gray-300 shadow-md p-3 rounded my-2'>
+          <h3 className='text-indigo-500 text-xl font-bold my-3'>My Notes </h3>
+          <NoteForm/>
+          {'kk' && <div className='border border-gray-300 shadow-md p-3 rounded my-2'>
             <div className='flex justify-between'>
               <div className='flex items-center gap-1'>
                 <img src={Profile} alt="Profile Image" className='cursor-pointer w-10 h-10 rounded-full'/>
@@ -63,7 +63,7 @@ export default function BookDetails() {
             <div className='mt-2'>
               <p className='text-indigo-800 italic'> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse maxime qui saepe, quisquam expedita asperiores, non voluptates ipsum recusandae et quis harum quasi ad vel voluptatem excepturi fugit sequi nam! </p>
             </div>
-          </div>
+          </div>}
         </div>
       </>
       )}
