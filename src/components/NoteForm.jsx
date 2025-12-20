@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
+import useFirestore from '../hooks/useFirestore';
 
 export default function NoteForm() {
   let {id} = useParams();
   const [note, setNote] = useState('');
-  const addNote = (e) => {
+  let { addCollection} = useFirestore();
+
+  const addNote = async (e) => {
     e.preventDefault();
     let data = {
       note,
       bookUid: id,
     }
+    await addCollection('notes', data);
+    setNote('');
   }
 
 
