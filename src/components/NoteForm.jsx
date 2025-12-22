@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import useFirestore from '../hooks/useFirestore';
+import { serverTimestamp } from 'firebase/firestore';
 
 export default function NoteForm() {
   let {id} = useParams();
@@ -12,6 +13,7 @@ export default function NoteForm() {
     let data = {
       note,
       bookUid: id,
+      date: serverTimestamp()
     }
     await addCollection('notes', data);
     setNote('');
