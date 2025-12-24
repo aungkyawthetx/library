@@ -27,6 +27,7 @@ export default function NoteList() {
           </div>
         </div>
       ))}
+      {notes.length <= 0 && <p className='text-red-500 italic text-sm'>There's no note for this book.</p>}
     </>
   )
 }
