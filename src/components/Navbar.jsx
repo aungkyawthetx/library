@@ -1,4 +1,4 @@
-import Profile from '../assets/profile.png';
+import Profile from '../assets/dev.jpeg';
 import { Link, useNavigate } from 'react-router-dom';
 import useTheme from '../hooks/useTheme';
 import lightIcon from '../assets/light.png';
@@ -35,7 +35,7 @@ export default function Navbar() {
                         </svg>
                         <span className='hidden md:block'> Create book </span>
                     </Link>
-                    <img src={Profile} alt="" className='cursor-pointer w-10 h-10 rounded-full'/>
+                    <img src={Profile} alt="" className={`cursor-pointer w-10 h-10 rounded-full ${isDark ? 'border-2 border-indigo-400' : ''}`} />
                     <div className='cursor-pointer'>
                         {isDark && <img src={lightIcon} alt="" className='w-6' onClick={() => changeTheme('light')}/>}
                         {!isDark && <img src={darkIcon} alt="" className='w-6' onClick={() => changeTheme('dark')}/>}
