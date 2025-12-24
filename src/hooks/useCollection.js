@@ -34,7 +34,7 @@ export function useCollection(colName, _q) {
     );
 
     return () => unsub();
-  }, [colName,_q]);
+  }, [colName, _q]);
 
   return { data, loading, error };
 }

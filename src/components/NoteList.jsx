@@ -12,9 +12,9 @@ export default function NoteList() {
   let { loading, error, data: notes } = useCollection('notes', ['bookUid', '==', id]);
   let { deleteDocument } = useFirestore();
 
-  const deleteNote = (e, id) => {
+  const deleteNote = async (e, id) => {
     e.preventDefault();
-    deleteDocument('notes', id);
+    await deleteDocument('notes', id);
   }
 
   return (
@@ -22,7 +22,7 @@ export default function NoteList() {
       {error && <p className='text-red-500'> {error} </p>}
       {loading && <p className='italic'>Loading..</p>}
       {notes && notes.map(n => (
-        <div className='border border-gray-300 shadow-md p-3 rounded my-2'>
+        <div className='border border-gray-300 shadow-md p-3 rounded my-2' key={n.id}>
           <div className='flex justify-between'>
             <div className='flex gap-1'>
               <img src={Profile} alt="Profile Image" className={`cursor-pointer w-10 h-10 rounded-full ${isDark ? 'border-2 border-indigo-400' : ''}`}/>
