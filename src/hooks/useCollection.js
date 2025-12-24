@@ -34,7 +34,7 @@ export function useCollection(colName, _q) {
     );
 
     return () => unsub();
-  }, [colName, JSON.stringify(_q)]);
+  }, [colName,_q]);
 
   return { data, loading, error };
 }

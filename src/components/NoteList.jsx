@@ -1,10 +1,12 @@
-import Profile from '../assets/profile.png';
 import { useParams } from 'react-router-dom';
+import Profile from '../assets/profile.png';
 import { useCollection } from '../hooks/useCollection';
 
 export default function NoteList() {
-  let {id} = useParams();
-  let {data: notes, loading, error} = useCollection('notes', ['bookUid', '==', id]);
+
+  let { id } = useParams();
+  console.log(id);
+  let { data: notes, loding, error } = useCollection('notes');
   console.log(notes);
 
   return (
