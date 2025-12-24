@@ -7,7 +7,6 @@ export default function NoteList() {
   let { id } = useParams();
   let { isDark } = useTheme();
   let { loading, error, data: notes} = useCollection('notes', ['bookUid', '==', id]);
-  console.log(notes);
 
   return (
     <>
@@ -27,7 +26,6 @@ export default function NoteList() {
           </div>
         </div>
       ))}
-      {notes.length <= 0 && <p className='text-red-500 italic text-sm'>There's no note for this book.</p>}
     </>
   )
 }
