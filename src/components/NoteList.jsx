@@ -3,14 +3,17 @@ import Profile from '../assets/dev.jpeg';
 import { useCollection } from '../hooks/useCollection';
 import useTheme from '../hooks/useTheme';
 import Trash from '../assets/trash.svg';
+import Pancel from '../assets/edit.svg';
 import moment from 'moment';
 import useFirestore from '../hooks/useFirestore';
+import { useState } from 'react';
 
 export default function NoteList() {
   let { id } = useParams();
   let { isDark } = useTheme();
   let { loading, error, data: notes } = useCollection('notes', ['bookUid', '==', id]);
   let { deleteDocument } = useFirestore();
+  let [edit, setEdit] = useState(null);
 
   const deleteNote = async (e, id) => {
     e.preventDefault();
@@ -32,7 +35,10 @@ export default function NoteList() {
           </div>
           <div className='flex items-center justify-between mt-2'>
             <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-indigo-800'}`}> {n.note} </p>
-            <img src={Trash} alt="Trash Icon" className='cursor-pointer'onClick={(e) => deleteNote(e, n.id)}/>
+            <div className='flex items-center gap-2'>
+              <img src={Pancel} alt="Trash Icon" className='cursor-pointer'onClick={(e) => editNote(e, n.id)}/>
+              <img src={Trash} alt="Trash Icon" className='cursor-pointer'onClick={(e) => deleteNote(e, n.id)}/>
+            </div>
           </div>
         </div>
       ))}
