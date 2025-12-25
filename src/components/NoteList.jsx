@@ -7,6 +7,7 @@ import Pancel from '../assets/edit.svg';
 import moment from 'moment';
 import useFirestore from '../hooks/useFirestore';
 import { useState } from 'react';
+import NoteForm from './NoteForm';
 
 export default function NoteList() {
   let { id } = useParams();
@@ -34,9 +35,12 @@ export default function NoteList() {
             <p className={`text-sm italic ${isDark ? 'text-gray-100' : 'text-gray-600'}`}> {moment(n?.date?.seconds * 1000).fromNow()} </p>
           </div>
           <div className='flex items-center justify-between mt-2'>
-            <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-indigo-800'}`}> {n.note} </p>
+            <div className='w-full'>
+              <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-indigo-800'}`}> {n.note} </p>
+              {/* <NoteForm/> */}
+            </div>
             <div className='flex items-center gap-2'>
-              <img src={Pancel} alt="Trash Icon" className='cursor-pointer'onClick={(e) => editNote(e, n.id)}/>
+              <img src={Pancel} alt="Trash Icon" className='cursor-pointer'onClick={() => setEdit(n)}/>
               <img src={Trash} alt="Trash Icon" className='cursor-pointer'onClick={(e) => deleteNote(e, n.id)}/>
             </div>
           </div>
