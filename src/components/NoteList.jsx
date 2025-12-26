@@ -7,7 +7,6 @@ import Pancel from '../assets/edit.svg';
 import moment from 'moment';
 import useFirestore from '../hooks/useFirestore';
 import { useState } from 'react';
-import NoteForm from './NoteForm';
 
 export default function NoteList() {
   let { id } = useParams();
