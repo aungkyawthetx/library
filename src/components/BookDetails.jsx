@@ -50,7 +50,7 @@ export default function BookDetails() {
           </div>
         </div>
         <div>
-          <h3 className='text-indigo-500 text-xl font-bold my-3'>My Notes </h3>
+          <h3 className={`${isDark ? 'text-indigo-500' : 'text-pink-500'} text-xl font-bold my-3`}>My Notes </h3>
           <NoteForm/>
           <NoteList/>
         </div>

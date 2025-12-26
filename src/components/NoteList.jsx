@@ -14,7 +14,7 @@ export default function NoteList() {
   let { isDark } = useTheme();
   let { loading, error, data: notes } = useCollection('notes', ['bookUid', '==', id]);
   let { deleteDocument } = useFirestore();
-  let [edit, setEdit] = useState('null');
+  let [editNote, setEditNote] = useState(null);
 
   const deleteNote = async (e, id) => {
     e.preventDefault();
@@ -36,11 +36,11 @@ export default function NoteList() {
           </div>
           <div className='flex items-center justify-between mt-2'>
             <div className='w-full'>
-              {!edit && <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-indigo-800'}`}> {n.note} </p>}
-              {edit && <textarea type="text" className={`border border-gray-300 w-250 rounded p-2 focus:outline-none focus:border-indigo-500 ${isDark ? 'bg-gray-300' : ''}`}> </textarea>}
+              {editNote?.id !== n.id && <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-indigo-800'}`}> {n.note} </p>}
+              {editNote?.id === n.id && <NoteForm type='update'setEditNote={setEditNote} editNote={editNote}/>}
             </div>
             <div className='flex items-center gap-2'>
-              <img src={Pancel} alt="Trash Icon" className='cursor-pointer'onClick={() => setEdit(n)}/>
+              <img src={Pancel} alt="Trash Icon" className='cursor-pointer'onClick={() => setEditNote(n)}/>
               <img src={Trash} alt="Trash Icon" className='cursor-pointer'onClick={(e) => deleteNote(e, n.id)}/>
             </div>
           </div>
