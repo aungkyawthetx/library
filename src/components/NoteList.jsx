@@ -7,13 +7,14 @@ import Pancel from '../assets/edit.svg';
 import moment from 'moment';
 import useFirestore from '../hooks/useFirestore';
 import { useState } from 'react';
+import NoteForm from '../components/NoteForm';
 
 export default function NoteList() {
   let { id } = useParams();
   let { isDark } = useTheme();
   let { loading, error, data: notes } = useCollection('notes', ['bookUid', '==', id]);
   let { deleteDocument } = useFirestore();
-  let [edit, setEdit] = useState(null);
+  let [edit, setEdit] = useState('null');
 
   const deleteNote = async (e, id) => {
     e.preventDefault();
@@ -35,8 +36,8 @@ export default function NoteList() {
           </div>
           <div className='flex items-center justify-between mt-2'>
             <div className='w-full'>
-              <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-indigo-800'}`}> {n.note} </p>
-              {/* <NoteForm/> */}
+              {!edit && <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-indigo-800'}`}> {n.note} </p>}
+              {edit && <textarea type="text" className={`border border-gray-300 w-250 rounded p-2 focus:outline-none focus:border-indigo-500 ${isDark ? 'bg-gray-300' : ''}`}> </textarea>}
             </div>
             <div className='flex items-center gap-2'>
               <img src={Pancel} alt="Trash Icon" className='cursor-pointer'onClick={() => setEdit(n)}/>
