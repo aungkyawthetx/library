@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { data, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import useFirestore from '../hooks/useFirestore';
 import { serverTimestamp } from 'firebase/firestore';
 import useTheme from '../hooks/useTheme';
