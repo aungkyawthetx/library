@@ -27,7 +27,7 @@ export default function NoteForm({type = 'create', setEditNote, editNote}) {
       await addCollection('notes', data);
     } else {
       editNote.note = note;
-      await updateDocument('notes', editNote.id, editNote);
+      await updateDocument('notes', editNote.id, editNote, false);
       setEditNote(null);
     }
     setNote('');
