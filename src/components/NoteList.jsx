@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import Profile from '../assets/dev.jpeg';
+import Profile from '../assets/profile.png';
 import { useCollection } from '../hooks/useCollection';
 import useTheme from '../hooks/useTheme';
 import Trash from '../assets/trash.svg';
