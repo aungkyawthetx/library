@@ -1,16 +1,20 @@
 import { useParams } from 'react-router-dom';
-import Profile from '../assets/dev.jpeg';
+import Profile from '../assets/profile.png';
 import { useCollection } from '../hooks/useCollection';
 import useTheme from '../hooks/useTheme';
 import Trash from '../assets/trash.svg';
+import Pancel from '../assets/edit.svg';
 import moment from 'moment';
 import useFirestore from '../hooks/useFirestore';
+import { useState } from 'react';
+import NoteForm from '../components/NoteForm';
 
 export default function NoteList() {
   let { id } = useParams();
   let { isDark } = useTheme();
   let { loading, error, data: notes } = useCollection('notes', ['bookUid', '==', id]);
   let { deleteDocument } = useFirestore();
+  let [editNote, setEditNote] = useState(null);
 
   const deleteNote = async (e, id) => {
     e.preventDefault();
@@ -31,8 +35,14 @@ export default function NoteList() {
             <p className={`text-sm italic ${isDark ? 'text-gray-100' : 'text-gray-600'}`}> {moment(n?.date?.seconds * 1000).fromNow()} </p>
           </div>
           <div className='flex items-center justify-between mt-2'>
-            <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-indigo-800'}`}> {n.note} </p>
-            <img src={Trash} alt="Trash Icon" className='cursor-pointer'onClick={(e) => deleteNote(e, n.id)}/>
+            <div className='w-full'>
+              {editNote?.id !== n.id && <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-indigo-800'}`}> {n.note} </p>}
+              {editNote?.id === n.id && <NoteForm type='update'setEditNote={setEditNote} editNote={editNote}/>}
+            </div>
+            <div className='flex items-center gap-2'>
+              <img src={Pancel} alt="Trash Icon" className='cursor-pointer'onClick={() => setEditNote(n)}/>
+              <img src={Trash} alt="Trash Icon" className='cursor-pointer'onClick={(e) => deleteNote(e, n.id)}/>
+            </div>
           </div>
         </div>
       ))}

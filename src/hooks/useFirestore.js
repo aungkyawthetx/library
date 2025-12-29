@@ -14,11 +14,13 @@ export default function useFirestore() {
         await deleteDoc(ref);
     }
 
-    let updateDocument = async (colName, id, data) => {
-        data.date = serverTimestamp();
+    let updateDocument = async (colName, id, data, updateDate = true) => {
+        if(updateDate) {
+            data.date = serverTimestamp();
+        }
         let ref = doc(db, colName, id);
         return updateDoc(ref, data);
     }
 
-    return {addCollection, deleteDocument, updateDocument} 
+    return { addCollection, deleteDocument, updateDocument }
 }

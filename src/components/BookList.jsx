@@ -62,6 +62,7 @@ export default function Books() {
                 ))}
             </div>
         )}
+        {!books?.length && !loading && <p className='text-red-500 italic font-semibold'>No book found! Try creating one☝️.</p>}
     </div>
   )
 }
