@@ -13,10 +13,10 @@ export default function Create() {
   let [categories, setCategories] = useState([]);
   let [newCategory, setNewCategory] = useState('');
   let [description, setDescription] = useState('');
-  let navigate = useNavigate();
-  let { isDark } = useTheme();
   let [categoryError, setCategoryError] = useState('');
   let [saving, setSaving] = useState(false)
+  let navigate = useNavigate();
+  let { isDark } = useTheme();
 
   const isEdit = Boolean(id);
 

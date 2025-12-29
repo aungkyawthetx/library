@@ -14,7 +14,7 @@ export default function NoteForm({type = 'create', setEditNote, editNote}) {
     if(type === 'update') {
       setNote(editNote.note);
     }
-  },[type])
+  },[type, editNote])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
