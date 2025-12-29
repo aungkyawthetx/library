@@ -16,6 +16,7 @@ export default function Create() {
   let navigate = useNavigate();
   let { isDark } = useTheme();
   let [categoryError, setCategoryError] = useState('');
+  let [saving, setSaving] = useState(false)
 
   const isEdit = Boolean(id);
 
@@ -58,6 +59,7 @@ export default function Create() {
   // add Book
   let handleSubmit = async (e) => {
     e.preventDefault();
+    setSaving(true);
     let data = {
       title,
       description,
@@ -66,7 +68,8 @@ export default function Create() {
       uid: user.uid
     }
     if (categories == '') {
-      setCategoryError('Please enter one or more genre.')
+      setCategoryError('Please enter one or more genre.');
+      setSaving(false);
       return;
     }
     if (isEdit) {
@@ -146,8 +149,14 @@ export default function Create() {
         />
       </div>
       <div className="flex items-center justify-between">
-        <button type="submit" className={`${isDark ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-pink-400 hover:bg-pink-500' } text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline cursor-pointer`}>
-          {isEdit ? 'Update Book' : 'Save Book'}
+        <button disabled={saving} type="submit" className={`${isDark ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-pink-400 hover:bg-pink-500' } flex items-center text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline cursor-pointer`}>
+          {saving && (
+            <svg className="mr-2 -ml-1 size-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" >
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+            </svg>
+          )}
+          {saving ? isEdit ? 'Updating...' : 'Saving...' : isEdit ? 'Update book' : 'Save book'}
         </button>
       </div>
     </form>
