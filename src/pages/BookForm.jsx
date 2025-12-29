@@ -15,6 +15,7 @@ export default function Create() {
   let [description, setDescription] = useState('');
   let navigate = useNavigate();
   let { isDark } = useTheme();
+  let [categoryError, setCategoryError] = useState('');
 
   const isEdit = Boolean(id);
 
@@ -43,8 +44,13 @@ export default function Create() {
       setNewCategory('');
       return;
     }
+    else if (newCategory == '') {
+      setCategoryError('Please enter one or more genre.')
+      return;
+    }
     setCategories(prev => [newCategory, ...prev]);
     setNewCategory('');
+    setCategoryError('');
   }
 
   let { user } = useContext(AuthContext);
@@ -59,6 +65,10 @@ export default function Create() {
       cover,
       uid: user.uid
     }
+    if (categories == '') {
+      setCategoryError('Please enter one or more genre.')
+      return;
+    }
     if (isEdit) {
       await updateDocument('books', id, data);
     }
@@ -71,7 +81,7 @@ export default function Create() {
   return (
   <div className='h-screen'>
     <p className={`inline-block align-baseline font-bold mb-2 text-lg ${isDark ? 'text-indigo-400' : 'text-pink-400' }`}>
-      Create New Book
+      {isEdit ? 'Update' : 'Create New'} Book
     </p>
     <form className={`bg-white shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-4 border border-gray-300 ${isDark ? 'bg-zinc-900 text-gray-200 border-indigo-400 shadow-none' : '' }`} method='POST' onSubmit={handleSubmit} >
       <div className="mb-4">
@@ -80,7 +90,7 @@ export default function Create() {
           name="title"
           id="title" 
           type="text"
-          placeholder="Enter book title"
+          placeholder="My Book Title"
           value={title}
           onChange={e => setTitle(e.target.value)}
           required
@@ -93,19 +103,19 @@ export default function Create() {
           name="description"
           value={description}
           onChange={e => setDescription(e.target.value)}
-          placeholder='Enter book description'
+          placeholder='Book description...'
           required
           > 
         </textarea>
       </div>
       <div className="mb-4">
-        <label className="block text-sm font-bold mb-2" htmlFor="categories"> Categories </label>
+        <label className="block text-sm font-bold mb-2" htmlFor="categories"> Genre </label>
         <div className='flex items-center gap-2'>
           <input className={`${isDark ? 'placeholder:text-gray-400' : ''} border border-gray-300 rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500`} 
             name="categories"
             type="text"
             id="categories"
-            placeholder="What's the book's genre?"
+            placeholder="What's your book's genre?"
             value={newCategory}
             onChange={e => setNewCategory(e.target.value)}
           />
@@ -115,6 +125,7 @@ export default function Create() {
             </svg>
           </button>
         </div>
+        { categoryError && <p className='text-red-500 italic text-sm'> {categoryError} </p> }
         {categories.map((genre) => (
           <span className='inline-flex mt-2 items-center px-3 py-1 text-xs font-medium rounded-full bg-blue-500 me-1 text-white' key={genre}>
             {genre}
@@ -123,16 +134,15 @@ export default function Create() {
       </div>
       <div className="mb-3">
         <label className="block text-sm font-bold mb-2" htmlFor="imageurl">
-          Image URL
+          Cover URL
         </label>
         <input className={`${isDark ? 'placeholder:text-gray-400' : ''} border border-gray-300 rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:ring-2 focus:ring-sky-500`}
           name="imageurl"
           id="imageurl" 
           type="text" 
-          placeholder="https://exampla.com/image.png"
+          placeholder="Leave blank for defalut cover"
           value={cover}  
           onChange={e => setCover(e.target.value)}
-          required
         />
       </div>
       <div className="flex items-center justify-between">
