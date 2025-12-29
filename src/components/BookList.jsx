@@ -45,7 +45,7 @@ export default function Books() {
                         <div className="flex justify-between flex-wrap space-y-1 items-center">
                            <div>
                                 {book.categories.map((genre) => (
-                                    <span className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-full ${classes[genre] || 'bg-gray-200 text-gray-700'}`} key={genre}>
+                                    <span className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-full ${classes[genre] || 'bg-gray-200 text-indigo-700'}`} key={genre}>
                                         {genre}
                                     </span>
                                 ))}
