@@ -28,7 +28,7 @@ export default function BookDetails() {
           <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 bg-white rounded-2xl shadow-md p-6 border border-gray-200 ${isDark ? 'bg-zinc-900 border-indigo-300 shadow-none' : ''}`}>
             <div className="flex justify-center">
               <img
-                src={book.cover}
+                src={book.cover ? book.cover : 'https://dhmckee.com/wp-content/uploads/2018/11/defbookcover-min.jpg'}
                 alt="Book Cover"
                 className="w-full rounded-xl shadow-md object-cover"
               />
