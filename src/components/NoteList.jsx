@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import Profile from '../assets/profile.png';
 import { useCollection } from '../hooks/useCollection';
-import useTheme from '../hooks/useTheme';
 import Trash from '../assets/trash.svg';
 import Pancel from '../assets/edit.svg';
 import moment from 'moment';
@@ -11,7 +10,6 @@ import NoteForm from '../components/NoteForm';
 
 export default function NoteList() {
   let { id } = useParams();
-  let { isDark } = useTheme();
   let { loading, error, data: notes } = useCollection('notes', ['bookUid', '==', id]);
   let { deleteDocument } = useFirestore();
   let [editNote, setEditNote] = useState(null);
@@ -26,17 +24,17 @@ export default function NoteList() {
       {error && <p className='text-red-500'> {error} </p>}
       {loading && <p className='italic'>Loading..</p>}
       {notes && notes.map(n => (
-        <div className='border border-gray-300 shadow-md p-3 rounded my-2' key={n.id}>
+        <div className='border border-gray-300 dark:border-indigo-400 shadow-md p-3 rounded my-2 bg-white dark:bg-zinc-800' key={n.id}>
           <div className='flex justify-between'>
             <div className='flex gap-1'>
-              <img src={Profile} alt="Profile Image" className={`cursor-pointer w-10 h-10 rounded-full ${isDark ? 'border-2 border-indigo-400' : ''}`}/>
-              <h3 className={`font-bold mt-1 ${isDark ? 'text-gray-200' : 'text-gray-800'}`}> Your Name </h3>
+              <img src={Profile} alt="Profile Image" className="cursor-pointer w-10 h-10 rounded-full border-2 border-indigo-400"/>
+              <h3 className='font-bold mt-1 text-gray-800 dark:text-gray-200'> Your Name </h3>
             </div>
-            <p className={`text-sm italic ${isDark ? 'text-gray-100' : 'text-gray-600'}`}> {moment(n?.date?.seconds * 1000).fromNow()} </p>
+            <p className='text-sm italic text-gray-600 dark:text-gray-100'> {moment(n?.date?.seconds * 1000).fromNow()} </p>
           </div>
           <div className='flex items-center justify-between mt-2'>
             <div className='w-full'>
-              {editNote?.id !== n.id && <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-indigo-800'}`}> {n.note} </p>}
+              {editNote?.id !== n.id && <p className='text-sm text-indigo-800 dark:text-gray-300'> {n.note} </p>}
               {editNote?.id === n.id && <NoteForm type='update'setEditNote={setEditNote} editNote={editNote}/>}
             </div>
             <div className='flex items-center gap-2'>

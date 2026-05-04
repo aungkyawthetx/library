@@ -1,13 +1,13 @@
-import { createContext, useReducer } from "react"
+import { createContext, useReducer, useEffect } from "react"
 
 const ThemeContext = createContext();
 
 let ThemeReducer = (state, action) => {
     switch (action.type) {
         case "CHANGE_THEME":
-            return {...state, theme : action.payload} // {theme: 'dark'}
+            return {...state, theme : action.payload}
         default:
-            return state; // light
+            return state;
     }
 }
 
@@ -18,11 +18,18 @@ const ThemeContextProvider = ({ children }) => {
     });
 
     let changeTheme = (theme) => {
-        // action => type + payload
         dispatch({type: "CHANGE_THEME", payload: theme});
     }
 
     const isDark = state.theme === 'dark';
+
+    useEffect(() => {
+        if (isDark) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [isDark]);
 
     return (
         <ThemeContext.Provider value={{...state, changeTheme, isDark}}>

@@ -19,19 +19,19 @@ export default function Register() {
 
     return (
         <div className="flex justify-center mt-15">
-            <form onSubmit={registerUser} className="bg-white shadow px-8 pt-6 pb-8 mb-4 w-full max-w-sm border border-gray-300 rounded-xl">
-                <h1 className='text-2xl font-bold text-indigo-500 mb-3 text-center'>Register</h1>
+            <form onSubmit={registerUser} className="bg-white dark:bg-zinc-800 shadow px-8 pt-6 pb-8 mb-4 w-full max-w-sm border border-gray-300 dark:border-indigo-400 rounded-xl">
+                <h1 className='text-2xl font-bold text-indigo-500 dark:text-indigo-400 mb-3 text-center'>Register</h1>
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                    <label className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" htmlFor="email">
                         Email
                     </label>
-                    <input value={email} onChange={e => setEmail(e.target.value)} className="appearance-none text-gray-600 border-2 border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-indigo-500 italic" id="email" type="email" placeholder="yourname@example.com"/>
+                    <input value={email} onChange={e => setEmail(e.target.value)} className="appearance-none text-gray-600 dark:text-gray-300 border-2 border-gray-300 dark:border-indigo-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-indigo-500 dark:bg-zinc-700 italic" id="email" type="email" placeholder="yourname@example.com"/>
                 </div>
                 <div className="mb-6">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                    <label className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" htmlFor="password">
                         Password
                     </label>
-                    <input value={password} onChange={e => setPassword(e.target.value)} className="appearance-none text-gray-600 border-2 border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-indigo-500 italic" id="password" type="password" placeholder="Password"/>
+                    <input value={password} onChange={e => setPassword(e.target.value)} className="appearance-none text-gray-600 dark:text-gray-300 border-2 border-gray-300 dark:border-indigo-400 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-indigo-500 dark:bg-zinc-700 italic" id="password" type="password" placeholder="Password"/>
                     {error && <p className="text-red-500 text-xs italic"> {error} </p>}
                 </div>
                 <div className="flex items-center justify-between">

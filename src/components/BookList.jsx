@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import useTheme from '../hooks/useTheme';
 import Trash from '../assets/trash.svg';
 import Pancel from '../assets/edit.svg';
 import useFirestore from '../hooks/useFirestore';
@@ -8,16 +7,14 @@ import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 
 export default function Books() {
-    let { isDark } = useTheme();
-    
     const classes = {
-        "Romance": "bg-pink-100 text-pink-700",
-        "History": "bg-yellow-100 text-yellow-700",
-        "Sci-Fi": "bg-indigo-100 text-indigo-700",
-        "Fantasy": "bg-green-100 text-green-700",
-        "Biography": "bg-blue-100 text-blue-700",
-        "Thriller": "bg-red-100 text-red-700",
-        "Classic": "bg-fuchsia-200 text-fuchsia-700",
+        "Romance": "bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300",
+        "History": "bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300",
+        "Sci-Fi": "bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300",
+        "Fantasy": "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
+        "Biography": "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
+        "Thriller": "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300",
+        "Classic": "bg-fuchsia-200 text-fuchsia-700 dark:bg-fuchsia-900 dark:text-fuchsia-300",
     };
 
     let { deleteDocument } = useFirestore();
@@ -37,15 +34,15 @@ export default function Books() {
         {!!books && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-3">
                 {books.map((book) => (
-                <Link to={`/books/${book.id}`} className={`p-4 border border-gray-200 rounded shadow ${isDark ? 'bg-zinc-900 border-indigo-400' : ''}`} key={book.id}>
-                        <img src={book.cover ? book.cover : 'https://dhmckee.com/wp-content/uploads/2018/11/defbookcover-min.jpg'} alt="" className={`h-80 w-full border border-gray-200 rounded-lg ${isDark && 'border-none'}`} />
+                <Link to={`/books/${book.id}`} className="p-4 border border-gray-200 rounded shadow bg-white dark:bg-zinc-800 dark:border-indigo-400" key={book.id}>
+                        <img src={book.cover ? book.cover : 'https://dhmckee.com/wp-content/uploads/2018/11/defbookcover-min.jpg'} alt="" className="h-80 w-full border border-gray-200 rounded-lg dark:border-none" />
                     <div className="text-start space-y-1 mt-3">
-                        <h1 className={`${isDark ? 'text-indigo-300' : ''} font-semibold uppercase`}> {book.title} </h1>
-                        <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} description`}> {book.description} </p>
+                        <h1 className="font-semibold uppercase text-gray-800 dark:text-indigo-300"> {book.title} </h1>
+                        <p className="text-gray-600 dark:text-gray-300 description"> {book.description} </p>
                         <div className="flex justify-between flex-wrap space-y-1 items-center">
                            <div>
                                 {book.categories.map((genre) => (
-                                    <span className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-full ${classes[genre] || 'bg-gray-200 text-indigo-700'}`} key={genre}>
+                                    <span className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-full ${classes[genre] || 'bg-gray-200 text-indigo-700 dark:bg-gray-700 dark:text-indigo-300'}`} key={genre}>
                                         {genre}
                                     </span>
                                 ))}
@@ -62,7 +59,7 @@ export default function Books() {
                 ))}
             </div>
         )}
-        {!books?.length && !loading && <p className='text-red-500 italic font-semibold'>No book found! Try creating one☝️.</p>}
+        {!books?.length && !loading && <p className='text-red-500 italic font-semibold'>No book found! Try creating one.</p>}
     </div>
   )
 }
